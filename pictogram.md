@@ -71,6 +71,9 @@ SELECT * FROM tags;
 ----+------
 (0 rows)
 
+ALTER TABLE tags ADD CONSTRAINT name UNIQUE(name);
+
+
 CREATE TABLE img_tags (
 	PRIMARY KEY(img_id, tag_id), 
 	img_id INTEGER REFERENCES images(id), 
