@@ -25,7 +25,7 @@
 <li>Antes  de  empezar  a  crear  la  base  de  datos  deben  leer  todas  las  instrucciones,  modelar  la base  y  generar  un  diagrama  que  tendrán  que  adjuntar  a  las  respuestas  de  este  ejercicio.</li>
 </ol>
 <p><img src="https://drive.google.com/uc?export=view&amp;id=1PcBBV_tDOuRIX441xGwJLqYOjZeTXoH8" alt="pintagram_db"></p>
-<pre><code>	CREATE DATABASE pintagram;
+<pre><code>CREATE DATABASE pintagram;
 	
 	\c pintagram;
 
