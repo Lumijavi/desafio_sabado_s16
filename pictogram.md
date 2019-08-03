@@ -22,82 +22,83 @@
 <p>Crear  base  de  datos  en  base  a  los  requerimientos  indicados.</p>
 <h2 id="checkpoints">Checkpoints</h2>
 <ol>
-<li>
-<p>Antes  de  empezar  a  crear  la  base  de  datos  deben  leer  todas  las  instrucciones,  modelar  la base  y  generar  un  diagrama  que  tendrán  que  adjuntar  a  las  respuestas  de  este  ejercicio.</p>
-<pre><code>CREATE DATABASE pintagram;
+<li>Antes  de  empezar  a  crear  la  base  de  datos  deben  leer  todas  las  instrucciones,  modelar  la base  y  generar  un  diagrama  que  tendrán  que  adjuntar  a  las  respuestas  de  este  ejercicio.</li>
+</ol>
+<p><img src="https://drive.google.com/file/d/1PcBBV_tDOuRIX441xGwJLqYOjZeTXoH8/view?usp=sharing" alt="pintagram_db"></p>
+<pre><code>	CREATE DATABASE pintagram;
+	
+	\c pintagram;
 
-\c pintagram;
-
-CREATE TABLE users ( 
-	ID SERIAL PRIMARY KEY, 
-	username VARCHAR(20)
-);
-
-SELECT * FROM users;
- id | username 
-----+----------
-(0 rows)
-
-CREATE TABLE images (
-	id SERIAL PRIMARY KEY, 
-	name VARCHAR(20), 
-	user_id INTEGER REFERENCES users(id)
-);
-
-SELECT * FROM images;
- id | name | user_id 
-----+------+---------
-(0 rows)
-
-
-CREATE TABLE likes (
-	PRIMARY KEY(user_id, img_id), 
-	user_id INTEGER REFERENCES users(id), 
-	img_id INTEGER REFERENCES images(id)
-);
-
-SELECT * FROM likes;
- user_id | img_id 
----------+--------
-(0 rows)
-
-CREATE TABLE tags (
-	id SERIAL PRIMARY KEY, 
-	name VARCHAR(10)
-);
-
-SELECT * FROM tags;
- id | name 
-----+------
-(0 rows)
-
-ALTER TABLE tags ADD CONSTRAINT name UNIQUE(name);
+	CREATE TABLE users ( 
+		ID SERIAL PRIMARY KEY, 
+		username VARCHAR(20)
+	);
+	
+	SELECT * FROM users;
+	 id | username 
+	----+----------
+	(0 rows)
+	
+	CREATE TABLE images (
+		id SERIAL PRIMARY KEY, 
+		name VARCHAR(20), 
+		user_id INTEGER REFERENCES users(id)
+	);
+	
+	SELECT * FROM images;
+	 id | name | user_id 
+	----+------+---------
+	(0 rows)
 
 
-CREATE TABLE img_tags (
-	PRIMARY KEY(img_id, tag_id), 
-	img_id INTEGER REFERENCES images(id), 
-	tag_id INTEGER REFERENCES tags(id)
-);
+	CREATE TABLE likes (
+		PRIMARY KEY(user_id, img_id), 
+		user_id INTEGER REFERENCES users(id), 
+		img_id INTEGER REFERENCES images(id)
+	);
+	
+	SELECT * FROM likes;
+	 user_id | img_id 
+	---------+--------
+	(0 rows)
+	
+	CREATE TABLE tags (
+		id SERIAL PRIMARY KEY, 
+		name VARCHAR(10)
+	);
+	
+	SELECT * FROM tags;
+	 id | name 
+	----+------
+	(0 rows)
 
-SELECT * FROM img_tags;
- img_id | tag_id 
---------+--------
-(0 rows)
+	ALTER TABLE tags ADD CONSTRAINT name UNIQUE(name);
+	
 
-INSERT INTO users (username) VALUES ('user_1');
-INSERT INTO users (username) VALUES ('user_2');
-INSERT INTO users (username) VALUES ('user_3');
+	CREATE TABLE img_tags (
+		PRIMARY KEY(img_id, tag_id), 
+		img_id INTEGER REFERENCES images(id), 
+		tag_id INTEGER REFERENCES tags(id)
+	);
+	
+	SELECT * FROM img_tags;
+	 img_id | tag_id 
+	--------+--------
+	(0 rows)
 
-SELECT * FROM users;
- id | username 
-----+----------
-  1 | user_1
-  2 | user_2
-  3 | user_3
-(3 rows)
+	INSERT INTO users (username) VALUES ('user_1');
+	INSERT INTO users (username) VALUES ('user_2');
+	INSERT INTO users (username) VALUES ('user_3');
+
+	SELECT * FROM users;
+	 id | username 
+	----+----------
+	  1 | user_1
+	  2 | user_2
+	  3 | user_3
+	(3 rows)
 </code></pre>
-</li>
+<ol start="2">
 <li>
 <p>Ingresar  2  imágenes  por  usuario.</p>
 <pre><code>INSERT INTO images (name, user_id) VALUES ('gato acostado', 1); 
